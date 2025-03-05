@@ -1,0 +1,5 @@
+1,1,1,Alee Alexandriei
+2,5,1,Strada Pompierilor
+3,4,2,Strada Grivitei
+4,3,3,Fundatura Cucului
+5,2,10,Strada Pasarelei

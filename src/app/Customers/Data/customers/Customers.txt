@@ -1,0 +1,5 @@
+1,vlad@gmail.com,Vlad@112,Breazu Vlad,Alee Alexandriei,Romania,0730121119
+2,denis@gmail.com,Denis@112,Denis Toropoc,Strada Pompierilor,Romania,073012120
+3,david@gmail.com,David@112,David Simion,Fundatura Cucului,Romania,0730121121
+4,dobre@gmail.com,Dobre@112,Dobre Andrei,Strada Grivitei,Romania,073012122
+5,matei@gmail.com,Matei@112,Chiru Matei,Strada Pasarelei,Romania,073012123

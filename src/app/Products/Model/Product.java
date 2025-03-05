@@ -1,15 +1,17 @@
 package app.Products.Model;
 
 public class Product {
+    private int id;
     private int name;
-    private String price;
-    private String weight;
+    private String price;  //lei
+    private String weight;  //gr/ml
     private String category;
-    private String stock;
+    private String stock; //buc
 
 
     //Constructor
-    public Product(int name, String price, String weight, String category, String stock) {
+    public Product(int id, int name, String price, String weight, String category, String stock) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.weight = weight;
@@ -20,17 +22,17 @@ public class Product {
     //Constructor cu string
     public Product(String text){
         String [] tokens = text.split(",");
-        this.name = Integer.parseInt(tokens[0]);
-        this.price = tokens[1];
-        this.weight = tokens[2];
-        this.category = tokens[3];
-        this.stock = tokens[4];
+        this.id = Integer.parseInt(tokens[0]);
+        this.name = Integer.parseInt(tokens[1]);
+        this.price = tokens[2];
+        this.weight = tokens[3];
+        this.category = tokens[4];
+        this.stock = tokens[5];
     }
 
     //Setters
-    public void setName(int name){
-        this.name = name;
-    }
+    public void setId(int id){ this.id = id; }
+    public void setName(int name){ this.name = name; }
     public void setPrice(String price){
         this.price = price;
     }
@@ -45,6 +47,7 @@ public class Product {
     }
 
     //Getters
+    public int getId(){ return id; }
     public int getName(){
         return name;
     }
@@ -63,7 +66,7 @@ public class Product {
 
     @Override
     public String toString(){
-        return this.name + " " + this.price + " " + this.weight + " " + this.category + " " + this.stock + " ";
+        return this.id + " " + this.name + " " + this.price + " " + this.weight + " " + this.category + " " + this.stock + " ";
     }
 
 
