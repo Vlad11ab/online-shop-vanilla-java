@@ -37,6 +37,7 @@ public class View {
         System.out.println("2. Editeaza cosul");
         System.out.println("3. Trimite comanda");
         System.out.println("4. Sterge un produs din cos");
+        System.out.println("5. Arata-mi produsele din cos");
     }
 
     private void play(){
@@ -58,19 +59,26 @@ public class View {
                     break;
                 case 4:
                     this.select4();
+                    break;
+                case 5:
+                    this.select5();
+                    break;
                 default:
                     System.out.println("Select a valid option!");
             }
+            System.out.println("");
         }
     }
 
 
     //Functii
-    private void select1(){
 
+    private void select5(){
+        System.out.println("Cosul dumneavoastra contine: ");
+        productService.showShoppingCart();
     }
 
-    private void select2(){
+    private void select4(){
 
     }
 
@@ -78,9 +86,34 @@ public class View {
 
     }
 
-    private void select4(){
+    private void select2(){
 
     }
+
+    private void select1(){
+
+         System.out.println("Lista produselor: ");
+         productService.showProducts();
+         System.out.println("Scrie denumirea produsului pentru a-l adauga in cos: ");
+
+         String productname = scanner.nextLine();
+
+         Product product = productService.getProductByName(productname);
+
+
+         if (product != null) {
+             System.out.println("Ai adaugat " + product.getName() + " in cos!");
+             System.out.println("Cosul dumneavoastra contine: ");
+             productService.showShoppingCart();
+         }
+         else System.out.println("Nu exista acest produs!");
+
+
+
+    }
+
+
+
 
 
 

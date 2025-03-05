@@ -19,7 +19,7 @@ public class OrderService {
     }
 
     private void loadOrders() {
-        String filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app.Orders/Data/app.Orders.txt";
+        String filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/OrderDetail/Data/OrderDetails.txt";
 
         File file = new File(filename);
 

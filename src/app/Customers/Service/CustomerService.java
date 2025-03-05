@@ -19,7 +19,7 @@ public class CustomerService {
     }
 
     private void loadCustomers(){
-        String filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app.Customers/Data/customers/app.Customers.txt";
+        String filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/Customers/Data/customers/Customers.txt";
 
         File file = new File(filename);
 
