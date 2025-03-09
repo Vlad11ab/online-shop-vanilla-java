@@ -8,6 +8,9 @@ import app.Orders.Model.Order;
 import app.Orders.Service.OrderService;
 import app.Products.Model.Product;
 import app.Products.Service.ProductService;
+import app.system.cart.Cart;
+import app.system.cart.CartItem;
+
 
 import java.util.Scanner;
 
@@ -16,6 +19,7 @@ public class View {
     private CustomerService customerService;
     private OrderDetail orderDetail;
     private OrderDetailService orderDetailService;
+    private Cart cart;
     private Order order;
     private OrderService orderService;
     private Product product;
@@ -27,6 +31,7 @@ public class View {
         this.orderDetailService = new OrderDetailService();
         this.orderService = new OrderService();
         this.productService = new ProductService();
+        this.cart = new Cart();
         this.scanner = new Scanner(System.in);
         this.play();
     }
@@ -37,7 +42,10 @@ public class View {
         System.out.println("2. Editeaza cosul");
         System.out.println("3. Trimite comanda");
         System.out.println("4. Sterge un produs din cos");
-        System.out.println("5. Arata-mi produsele din cos");
+        System.out.println("5. Afisare produse");
+        System.out.println("6. Arata-mi produsele din cos");
+
+
     }
 
     private void play(){
@@ -63,6 +71,9 @@ public class View {
                 case 5:
                     this.select5();
                     break;
+                case 6:
+                    this.select6();
+                    break;
                 default:
                     System.out.println("Select a valid option!");
             }
@@ -73,9 +84,15 @@ public class View {
 
     //Functii
 
-    private void select5(){
+    private void select6(){
         System.out.println("Cosul dumneavoastra contine: ");
-        productService.showShoppingCart();
+        cart.showCartItems();
+    }
+
+    private void select5(){
+        System.out.println("Acestea sunt produsele disponibile: ");
+        productService.showProducts();
+
     }
 
     private void select4(){
@@ -91,25 +108,18 @@ public class View {
     }
 
     private void select1(){
+        System.out.println("Lista produselor: ");
+        productService.showProducts();
 
-         System.out.println("Lista produselor: ");
-         productService.showProducts();
-         System.out.println("Scrie denumirea produsului pentru a-l adauga in cos: ");
-
-         String productname = scanner.nextLine();
-
-         Product product = productService.getProductByName(productname);
-
-
-         if (product != null) {
-             System.out.println("Ai adaugat " + product.getName() + " in cos!");
-             System.out.println("Cosul dumneavoastra contine: ");
-             productService.showShoppingCart();
+        System.out.println("Introduceti numele produsului urmat de cantitate");
+        String productName = scanner.nextLine();
+        Product product = productService.getProductByName(productName);
+        //todo:veriific existenta produsulu
+        //todo:Creez un cartItem cu detaliile din produs
+         if(productService.foundProduct(product)){
+             CartItem cartItem = new CartItem(product,1);
+             cart.addToCart(cartItem);
          }
-         else System.out.println("Nu exista acest produs!");
-
-
-
     }
 
 

@@ -70,11 +70,20 @@ public class ProductService {
 
         for(Product product : products) {
             if(product.getName().equalsIgnoreCase(name)) {
-                this.shoppingCart.add(product);
+               // this.shoppingCart.add(product);
                 return product;
             }
         }
         return null;
+    }
+
+    public boolean foundProduct(Product product) {
+        for(Product p : products) {
+            if(product.getId() == p.getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
