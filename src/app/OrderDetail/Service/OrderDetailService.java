@@ -1,12 +1,16 @@
 package app.OrderDetail.Service;
 
 import app.OrderDetail.Model.OrderDetail;
+import app.Orders.Model.Order;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+
+import static java.lang.Math.random;
 
 public class OrderDetailService {
 
@@ -33,6 +37,37 @@ public class OrderDetailService {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void addOrderDetail(OrderDetail orderDetail) {
+
+        this.orderdetails.add(orderDetail);
+    }
+
+    public void removeOrderDetail(OrderDetail orderDetail) {
+        this.orderdetails.remove(orderDetail);
+    }
+
+
+    public List<OrderDetail> getOrderDetailsByOrderId(int orderId) {
+
+        for(OrderDetail orderdetail : orderdetails) {
+            if(orderdetail.getOrderId() == orderId) {
+                return orderdetails;
+            }
+        }
+
+        return null;
+    }
+
+    public int generateOrderID() {
+        Random rand = new Random();
+        int orderID = rand.nextInt(10000)+1;
+        while(getOrderDetailsByOrderId(orderID) != null) {
+            orderID = rand.nextInt(10000)+1;
+        }
+
+        return orderID;
     }
 
 

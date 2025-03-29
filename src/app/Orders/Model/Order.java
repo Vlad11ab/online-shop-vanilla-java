@@ -6,6 +6,7 @@ public class Order {
     private int ammount;
     private String shippingAddres;
 
+
     //Constructor
     public Order(int id, int customerId, int ammount, String shippingAddres) {
         this.id = id;
@@ -24,7 +25,7 @@ public class Order {
     }
 
     //Setters
-    public void setid(int id) { this.id = id; }
+    public void setId(int id) { this.id = id; }
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
@@ -49,7 +50,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return this.id + "," + this.customerId + "," + this.ammount + "," + this.shippingAddres;
+        return this.id+"";
     }
 
 

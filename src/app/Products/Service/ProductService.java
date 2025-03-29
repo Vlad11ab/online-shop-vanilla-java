@@ -86,6 +86,17 @@ public class ProductService {
         return false;
     }
 
+    public List<Product> getAllProductsById(int id){
+        List<Product> products = new ArrayList<>();
+
+        for(Product product : products) {
+            if(product.getId() == id) {
+                products.add(product);
+            }
+        }
+        return products;
+    }
+
 
 
 
