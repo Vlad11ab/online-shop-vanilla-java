@@ -36,6 +36,13 @@ public class CustomerService {
 
     }
 
+    public Customer getCustomerForLogin(String fullName, String password){
+        for(Customer customer : customers){
+            if(customer.getFullName().equals(fullName) && customer.getPassword().equals(password));
+            return customer;
+        }
+        return null;
+    }
 
 
 

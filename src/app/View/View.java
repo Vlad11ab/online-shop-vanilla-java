@@ -25,9 +25,8 @@ public class View {
     private ProductService productService;
     private Scanner scanner;
 
-    public View() {
-        this.customer = new Customer(10,"","","","","","");
-
+    public View(Customer customer){
+        this.customer = customer;
         this.customerService = new CustomerService();
         this.orderDetailService = new OrderDetailService();
         this.orderService = new OrderService();
@@ -128,12 +127,6 @@ public class View {
             else System.out.println("Id invalid!");
         }
 
-        //orderdetails
-//    private int id;
-//    private int orderId;
-//    private int productId;
-//    private float price;
-//    private int quantity;
 
 //        //todo: getAllProductsByOiD din productssERVICE
 //        List <Order> clientOrders = this.orderService.getOrdersByCustomerId(customer.getId());
