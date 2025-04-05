@@ -5,6 +5,8 @@ import app.Orders.Model.Order;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,15 +17,16 @@ import static java.lang.Math.random;
 public class OrderService {
 
     private List<Order> orders;
+    private String filename;
 
     public OrderService() {
         orders = new ArrayList<>();
 
+        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/Orders/Data/Orders.txt";
         this.loadOrders();
     }
 
     private void loadOrders() {
-        String filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/OrderDetail/Data/OrderDetails.txt";
 
         File file = new File(filename);
 
@@ -84,13 +87,13 @@ public class OrderService {
 
      public List<Order> getOrdersByCustomerId(int customerId) {
 
-        List<Order> orders = new ArrayList<>();
+        List<Order> customersOrders = new ArrayList<>();
         for(Order order : orders) {
             if(order.getCustomerId() == customerId) {
-                orders.add(order);
+                customersOrders.add(order);
             }
         }
-        return orders;
+        return customersOrders;
      }
 
      public void showAllOrdersIds(){
@@ -98,6 +101,33 @@ public class OrderService {
             System.out.println(order.getId());
         }
      }
+
+
+    public  void saveAll(){
+
+        File file = new File(filename);
+        try{
+            FileWriter fileWriter = new FileWriter(file);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.print(this);
+            printWriter.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    @Override
+    public String toString() {
+        String text="";
+        for(int i = 0; i < orders.size()-1; i++){
+            text += orders.get(i).toString() + "\n";
+        }
+        text += orders.get(orders.size()-1).toString();
+        return text;
+    }
 
 
 }

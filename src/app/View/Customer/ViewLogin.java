@@ -1,6 +1,6 @@
-package app.View;
+package app.View.Customer;
 
-import app.Customers.Model.Customer;
+import app.Users.Model.Customer;
 import app.Customers.Service.CustomerService;
 
 import java.util.Scanner;

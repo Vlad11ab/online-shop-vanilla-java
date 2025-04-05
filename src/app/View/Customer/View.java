@@ -1,6 +1,6 @@
-package app.View;
+package app.View.Customer;
 
-import app.Customers.Model.Customer;
+import app.Users.Model.Customer;
 import app.Customers.Service.CustomerService;
 import app.OrderDetail.Model.OrderDetail;
 import app.OrderDetail.Service.OrderDetailService;
@@ -12,7 +12,6 @@ import app.system.cart.Cart;
 import app.system.cart.CartItem;
 
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,6 +65,7 @@ public class View {
 
         while(running){
             this.meniu();
+
             int choose = Integer.parseInt(scanner.nextLine());
             switch (choose){
                 case 1:
@@ -104,7 +104,7 @@ public class View {
 
 
     //Functii
-    public void select9(){
+    private void select9(){
         orderService.showAllOrdersIds();
     }
 
@@ -119,8 +119,10 @@ public class View {
 
                 List <OrderDetail> orderdetails = orderDetailService.getOrderDetailsByOrderId(orderId);
 
-                    for(OrderDetail orderDetail : orderdetails){
-                    System.out.println("Id:" + orderDetail.getId() + " OrderId:" + orderDetail.getOrderId() + " ProductId:" + orderDetail.getProductId() + " Quantity:" + orderDetail.getQuantity() );
+                    for(OrderDetail orderDetail : orderdetails) {
+                        if (orderDetail.getOrderId() == orderId) {
+                            System.out.println("Id:" + orderDetail.getId() + " OrderId:" + orderDetail.getOrderId() + " ProductId:" + orderDetail.getProductId() + " Quantity:" + orderDetail.getQuantity());
+                        }
                     }
 
             }
@@ -209,7 +211,8 @@ public class View {
 
             }
             this.orderService.addOrder(order);
-
+            this.orderService.saveAll();
+            this.orderDetailService.saveAll();
             System.out.println("Comanda cu Id-ul:" + order.getId()+ " a fost trimisa cu succes");
         }
 

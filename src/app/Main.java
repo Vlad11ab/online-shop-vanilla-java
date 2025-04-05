@@ -1,19 +1,15 @@
 package app;
 
 
-import app.Orders.Service.OrderService;
-import app.Products.Service.ProductService;
-import app.View.View;
-import app.View.ViewLogin;
+import app.View.Admin.ViewLoginAdmin;
+import app.View.Customer.ViewLogin;
 
 public class Main {
     public static void main(String[] args) {
 
 
+    ViewLoginAdmin viewLoginAdmin = new ViewLoginAdmin();
 
-
-
-        ViewLogin vl = new ViewLogin();
 
     }
 

@@ -5,6 +5,8 @@ import app.Orders.Model.Order;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,15 +17,16 @@ import static java.lang.Math.random;
 public class OrderDetailService {
 
     private List<OrderDetail> orderdetails;
+    private String filename;
 
     public OrderDetailService() {
         orderdetails = new ArrayList<>();
 
+        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/OrderDetail/Data/OrderDetails.txt";
         this.loadOrderDetails();
     }
 
     private void loadOrderDetails() {
-        String filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/OrderDetail/Data/OrderDetails.txt";
 
         File file = new File(filename);
 
@@ -70,6 +73,31 @@ public class OrderDetailService {
         return orderID;
     }
 
+
+    @Override
+    public String toString() {
+        String text="";
+        for(int i = 0; i < orderdetails.size()-1; i++){
+            text += orderdetails.get(i).toString() + "\n";
+        }
+        text += orderdetails.get(orderdetails.size()-1).toString();
+        return text;
+    }
+
+    public  void saveAll(){
+
+        File file = new File(filename);
+        try{
+            FileWriter fileWriter = new FileWriter(file);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.print(this);
+            printWriter.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
 
 
 
