@@ -1,17 +1,18 @@
 package app.View.Customer;
 
 import app.Users.Model.Customer;
-import app.Customers.Service.CustomerService;
+//import app.Customers.OldCustomerService.CustomerService;
+import app.Users.Service.UserService;
 
 import java.util.Scanner;
 
 public class ViewLogin {
 
-    private CustomerService customerService;
+    private UserService userService;
     private Scanner scanner;
 
     public ViewLogin(){
-        this.customerService = new CustomerService();
+        this.userService = new UserService();
         this.scanner = new Scanner(System.in);
         this.play();
     }
@@ -26,7 +27,7 @@ public class ViewLogin {
 
                 while (running) {
                     this.meniuLogin();
-                    int choose = this.scanner.nextInt();
+                    int choose = Integer.parseInt(scanner.nextLine());
                     switch (choose) {
                         case 1:
                             this.select1();
@@ -47,11 +48,11 @@ public class ViewLogin {
 
     private void select1(){
         System.out.println("Username: ");
-        String username = this.scanner.next();
+        String username = scanner.nextLine();
         System.out.println("Password: ");
-        String password = this.scanner.next();
+        String password = scanner.nextLine();
 
-        Customer customer = customerService.getCustomerForLogin(username, password); //username = fullName
+        Customer customer = userService.getCustomerForLogin(username, password); //username = fullName
         if(customer != null){
             System.out.println("Login Successful!");
 

@@ -11,8 +11,8 @@ public class ViewLoginAdmin {
     private Scanner scanner;
 
     public ViewLoginAdmin() {
-        userService = new UserService();
-        scanner = new Scanner(System.in);
+        this.userService = new UserService();
+        this.scanner = new Scanner(System.in);
         this.play();
 
     }
@@ -26,7 +26,7 @@ public class ViewLoginAdmin {
 
         while(running){
             this.meniuLoginAdmin();
-            int choose = scanner.nextInt();
+            int choose = Integer.parseInt(scanner.nextLine());
             switch(choose){
                 case 1:
                     this.select1();
@@ -50,6 +50,7 @@ public class ViewLoginAdmin {
 
             ViewAdmin viewAdmin = new ViewAdmin(admin);
         }
+        else System.out.println("Admin Login Failed");
     }
 
 

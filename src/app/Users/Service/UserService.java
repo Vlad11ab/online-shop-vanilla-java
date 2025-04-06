@@ -6,6 +6,8 @@ import app.Users.Model.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -47,18 +49,61 @@ public class UserService {
 
     }
 
+    public Customer getCustomerForLogin(String username, String password){
+        for(User user : users) {
+
+            if(user instanceof Customer) {
+                Customer customer = (Customer) user;
+                if(customer.getFullName().equals(username) && customer.getPassword().equals(password)) {
+                    return customer;
+                }
+            }
+
+        }
+        return null;
+
+    }
+
     public Admin getAdminForLogin(String username, String password) {
         for (User user : users) {
 
             if(user instanceof Admin){
                 Admin admin = (Admin) user;
-                if(admin.getFullName().equals(username) && admin.getPassword().equals(password)){
+                if(admin.getAdminName().equals(username) && admin.getAdminPassword().equals(password)){
                     return admin;
                 }
             }
 
         }
         return null;
+
+    }
+
+    public void addCustomer (User user){
+        if(user instanceof Customer) {
+            Customer customer = (Customer) user;
+            this.users.add(customer);
+        }
+
+    }
+
+    public void removeCustomer (User user){
+        if(user instanceof Customer) {
+            Customer customer = (Customer) user;
+            users.remove(customer);
+        }
+
+    }
+
+    public void showCustomers(){
+        for(User user : users) {
+
+            if(user instanceof Customer) {
+                Customer customer = (Customer) user;
+                System.out.println(customer.toString());
+            }
+
+        }
 
     }
 
@@ -82,6 +127,20 @@ public class UserService {
     }
 
 
+    public  void saveAll(){
+
+        File file = new File(filename);
+        try{
+            FileWriter fileWriter = new FileWriter(file);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.print(this);
+            printWriter.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
 
 
 

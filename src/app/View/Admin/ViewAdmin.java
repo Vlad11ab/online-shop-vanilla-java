@@ -27,6 +27,8 @@ public class ViewAdmin {
         this.productService = new ProductService();
         this.orderService = new OrderService();
         this.orderDetailService = new OrderDetailService();
+        this.cart = new Cart();
+        this.scanner = new Scanner(System.in);
         this.play();
     }
 
@@ -42,7 +44,7 @@ public class ViewAdmin {
         while (running) {
             this.meniuAdmin();
 
-            int choose = scanner.nextInt();
+            int choose = Integer.parseInt(scanner.nextLine());
             switch (choose) {
                 case 1:
                     this.select1();

@@ -1,7 +1,7 @@
 package app.Users.Model;
 
 public class Customer extends User {
-    private int id;
+//    private int id;
     private String defaultShippingAddress;
     private String country;
     private String phone;
@@ -9,7 +9,7 @@ public class Customer extends User {
     //Constructor
     public Customer(int id, String fullName, String email, String password, String defaultShippingAddress, String country, String phone) {
         super(id, fullName, email, password);
-        this.id = id;
+//        this.id = id;
         this.defaultShippingAddress = defaultShippingAddress;
         this.country = country;
         this.phone = phone;
@@ -19,16 +19,16 @@ public class Customer extends User {
     public Customer(String text){
         super(text);
         String [] tokens = text.split(",");
-        //token[1] id, token[2] email, token[3] password token[3] fullName
+        //token[1] id, token[2] email, token[3] password token[4] fullName
         this.defaultShippingAddress = tokens[5];
         this.country = tokens[6];
         this.phone = tokens[7];
     }
 
     //Setters
-    public void setId(int id){
-        this.id = id;
-    }
+//    public void setId(int id){
+//        this.id = id;
+//    }
     public void setDefaultShippingAddress(String defaultShippingAddress){
         this.defaultShippingAddress = defaultShippingAddress;
     }
@@ -40,9 +40,9 @@ public class Customer extends User {
     }
 
     //Getters
-    public int getId(){
-        return id;
-    }
+//    public int getId(){
+//        return id;
+//    }
     public String getDefaultShippingAddress(){
         return defaultShippingAddress;
     }

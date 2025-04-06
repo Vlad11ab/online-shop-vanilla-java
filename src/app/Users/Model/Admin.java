@@ -2,29 +2,29 @@ package app.Users.Model;
 
 
 public class Admin extends User {
-    private int id;
+//    private int id;
     private String adminName;
     private String adminPassword;
 
-    public Admin(int id, String fullName, String email, String password, String adminName, String adminPassword) {
+    public Admin(int id, String email, String fullName, String password, String adminName, String adminPassword) {
         super(id, fullName, email, password);
-        this.id = id;
+//        this.id = id;
         this.adminName = adminName;
         this.adminPassword = adminPassword;
     }
 
     public Admin(String text){
         super(text);
-        String [] tokens = text.split(" ");
-        //token[1] id, token[2] email, token[3] password token[3] fullName
+        String [] tokens = text.split(",");
+        //token[1] id, token[2] email, token[3] password token[4] fullName
         this.adminName = tokens[5];
         this.adminPassword = tokens[6];
     }
 
     //Setters
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
     public void setAdminName(String adminName) {
         this.adminName = adminName;
     }
@@ -33,9 +33,9 @@ public class Admin extends User {
     }
 
     //Getters
-    public int getId() {
-        return id;
-    }
+//    public int getId() {
+//        return id;
+//    }
     public String getAdminName() {
         return adminName;
     }

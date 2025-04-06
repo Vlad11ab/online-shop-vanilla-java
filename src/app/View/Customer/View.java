@@ -1,13 +1,14 @@
 package app.View.Customer;
 
 import app.Users.Model.Customer;
-import app.Customers.Service.CustomerService;
+//import app.Customers.OldCustomerService.CustomerService;
 import app.OrderDetail.Model.OrderDetail;
 import app.OrderDetail.Service.OrderDetailService;
 import app.Orders.Model.Order;
 import app.Orders.Service.OrderService;
 import app.Products.Model.Product;
 import app.Products.Service.ProductService;
+import app.Users.Service.UserService;
 import app.system.cart.Cart;
 import app.system.cart.CartItem;
 
@@ -17,7 +18,8 @@ import java.util.Scanner;
 
 public class View {
     private Customer customer;
-    private CustomerService customerService;
+//    private CustomerService customerService;
+    private UserService userService;
     private OrderDetailService orderDetailService;
     private Cart cart;
     private OrderService orderService;
@@ -26,7 +28,8 @@ public class View {
 
     public View(Customer customer){
         this.customer = customer;
-        this.customerService = new CustomerService();
+        this.userService = new UserService();
+//        this.customerService = new CustomerService();
         this.orderDetailService = new OrderDetailService();
         this.orderService = new OrderService();
         this.productService = new ProductService();
