@@ -1,7 +1,6 @@
-package app.View.Customer;
+package app.View;
 
 import app.Users.Model.Customer;
-//import app.Customers.OldCustomerService.CustomerService;
 import app.OrderDetail.Model.OrderDetail;
 import app.OrderDetail.Service.OrderDetailService;
 import app.Orders.Model.Order;
@@ -16,9 +15,8 @@ import app.system.cart.CartItem;
 import java.util.List;
 import java.util.Scanner;
 
-public class View {
+public class ViewCustomer {
     private Customer customer;
-//    private CustomerService customerService;
     private UserService userService;
     private OrderDetailService orderDetailService;
     private Cart cart;
@@ -26,10 +24,9 @@ public class View {
     private ProductService productService;
     private Scanner scanner;
 
-    public View(Customer customer){
+    public ViewCustomer(Customer customer){
         this.customer = customer;
         this.userService = new UserService();
-//        this.customerService = new CustomerService();
         this.orderDetailService = new OrderDetailService();
         this.orderService = new OrderService();
         this.productService = new ProductService();

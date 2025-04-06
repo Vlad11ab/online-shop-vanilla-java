@@ -1,4 +1,4 @@
-package app.View.Admin;
+package app.View;
 
 import app.OrderDetail.Service.OrderDetailService;
 import app.Orders.Service.OrderService;

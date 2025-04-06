@@ -49,25 +49,16 @@ public class UserService {
 
     }
 
-    public Customer getCustomerForLogin(String username, String password){
-        for(User user : users) {
+    public User getUserForLogin(String username, String password) {
+        for (User user : users) {
 
             if(user instanceof Customer) {
                 Customer customer = (Customer) user;
-                if(customer.getFullName().equals(username) && customer.getPassword().equals(password)) {
+                if(customer.getFullName().equals(username) && customer.getPassword().equals(password)){
                     return customer;
                 }
             }
-
-        }
-        return null;
-
-    }
-
-    public Admin getAdminForLogin(String username, String password) {
-        for (User user : users) {
-
-            if(user instanceof Admin){
+            else if(user instanceof Admin) {
                 Admin admin = (Admin) user;
                 if(admin.getAdminName().equals(username) && admin.getAdminPassword().equals(password)){
                     return admin;
@@ -78,6 +69,7 @@ public class UserService {
         return null;
 
     }
+
 
     public void addCustomer (User user){
         if(user instanceof Customer) {

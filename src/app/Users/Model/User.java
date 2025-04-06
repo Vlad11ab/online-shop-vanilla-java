@@ -58,7 +58,7 @@ public abstract class User {
 
     @Override
     public String toString(){
-        return "id: " + this.id + "fullName: " + this.fullName + ", email: " + this.email + ", password: " + this.password;
+        return "id: " + this.id + ", fullName: " + this.fullName + ", email: " + this.email + ", password: " + this.password;
     }
 
     @Override
