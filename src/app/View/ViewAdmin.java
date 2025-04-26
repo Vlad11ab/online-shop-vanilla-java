@@ -23,10 +23,10 @@ public class ViewAdmin {
 
     public ViewAdmin(Admin admin) {
         this.admin = admin;
-        this.userService = new UserService();
-        this.productService = new ProductService();
-        this.orderService = new OrderService();
-        this.orderDetailService = new OrderDetailService();
+        this.userService = UserService.getInstance();
+        this.productService = ProductService.getInstance();
+        this.orderService = OrderService.getInstance();
+        this.orderDetailService = OrderDetailService.getInstance();
         this.cart = new Cart();
         this.scanner = new Scanner(System.in);
         this.play();

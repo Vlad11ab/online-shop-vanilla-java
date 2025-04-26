@@ -26,10 +26,10 @@ public class ViewCustomer {
 
     public ViewCustomer(Customer customer){
         this.customer = customer;
-        this.userService = new UserService();
-        this.orderDetailService = new OrderDetailService();
-        this.orderService = new OrderService();
-        this.productService = new ProductService();
+        this.userService = UserService.getInstance();
+        this.orderDetailService = OrderDetailService.getInstance();
+        this.orderService = OrderService.getInstance();
+        this.productService = ProductService.getInstance();
         this.cart = new Cart();
         this.scanner = new Scanner(System.in);
         this.play();

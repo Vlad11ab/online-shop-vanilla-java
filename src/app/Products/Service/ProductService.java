@@ -10,14 +10,23 @@ import java.util.Scanner;
 
 public class ProductService {
 
+    private static ProductService instance;
+
     private List<Product> products;
     private List<Product> shoppingCart;
 
-    public ProductService() {
+    private ProductService() {
         products = new ArrayList<>();
         shoppingCart = new ArrayList<>();
 
         this.loadProducts();
+    }
+
+    public static ProductService getInstance() {
+        if (instance == null) {
+            instance = new ProductService();
+        }
+        return instance;
     }
 
     private void loadProducts() {

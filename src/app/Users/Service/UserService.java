@@ -14,15 +14,24 @@ import java.util.Scanner;
 
 public class UserService {
 
+    private static UserService instance;
+
     private List<User> users;
 
     private String filename;
 
-    public UserService() {
+    private UserService() {
         users = new ArrayList<>();
 
         this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/Users/Data/Users.txt";
         this.loadUsers();
+    }
+
+    public static UserService getInstance() {
+        if(instance == null) {
+            instance = new UserService();
+        }
+        return instance;
     }
 
     private void loadUsers() {

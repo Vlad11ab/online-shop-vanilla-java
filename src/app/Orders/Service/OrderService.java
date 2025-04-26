@@ -16,14 +16,23 @@ import static java.lang.Math.random;
 
 public class OrderService {
 
+    public static OrderService instance;
+
     private List<Order> orders;
     private String filename;
 
-    public OrderService() {
+    private OrderService() {
         orders = new ArrayList<>();
 
         this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/Orders/Data/Orders.txt";
         this.loadOrders();
+    }
+
+    public static OrderService getInstance(){
+        if(instance == null){
+            instance = new OrderService();
+        }
+        return instance;
     }
 
     private void loadOrders() {

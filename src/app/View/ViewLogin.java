@@ -13,7 +13,7 @@ public class ViewLogin {
     private Scanner scanner;
 
     public ViewLogin(){
-        this.userService = new UserService();
+        this.userService = UserService.getInstance();
         this.scanner = new Scanner(System.in);
         this.play();
     }
