@@ -1,6 +1,6 @@
 package app.system.cart;
 
-import app.Products.Model.Product;
+import app.products.model.Product;
 
 public class CartItem {
 

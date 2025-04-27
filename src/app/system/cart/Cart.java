@@ -1,15 +1,8 @@
 package app.system.cart;
 
-import app.Products.Model.Product;
-import app.Products.Service.ProductService;
 
-
-import javax.sql.XAConnection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
-import static java.sql.Types.NULL;
 
 public class Cart {
 
