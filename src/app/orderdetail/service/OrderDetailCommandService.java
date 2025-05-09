@@ -11,7 +11,7 @@ public interface OrderDetailCommandService extends Data {
 
     void removeOrderDetail(OrderDetail orderDetail);
 
-    int generateOrderId();
 
-    List<OrderDetail> getOrderDetailsByOrderId(int orderId);
+
+
 }

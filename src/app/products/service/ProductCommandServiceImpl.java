@@ -15,7 +15,7 @@ public class ProductCommandServiceImpl implements ProductCommandService {
     private List<Product> products;
     private List<Product> shoppingCart;
 
-    String filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/Products/Data/Products.txt";
+    String filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/products/data/Products.txt";
 
 
     public ProductCommandServiceImpl() {
@@ -53,52 +53,6 @@ public class ProductCommandServiceImpl implements ProductCommandService {
         }
     }
 
-    @Override
-    public Product getProductById(int id) {
-
-        for(Product product : products) {
-            if(product.getId() == id) {
-                this.shoppingCart.add(product);
-                return product;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public Product getProductByName(String name){
-
-        for(Product product : products) {
-            if(product.getName().equalsIgnoreCase(name)) {
-                // this.shoppingCart.add(product);
-                return product;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public boolean foundProduct(Product product) {
-        for(Product p : products) {
-            if(product.getId() == p.getId()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public List<Product> getAllProductsById(int id) {
-        List<Product> products = new ArrayList<>();
-
-        for (Product product : products) {
-            if (product.getId() == id) {
-                products.add(product);
-            }
-        }
-        return products;
-
-    }
 
 
 

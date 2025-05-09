@@ -1,6 +1,7 @@
 package app.orderdetail.service;
 
 import app.orderdetail.model.OrderDetail;
+import app.orders.model.Order;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +20,7 @@ public class OrderDetailCommandServiceImpl implements OrderDetailCommandService 
     public OrderDetailCommandServiceImpl() {
         orderdetails = new ArrayList<>();
 
-        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/OrderDetail/Data/OrderDetails.txt";
+        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/orderdetail/data/OrderDetails.txt";
         this.loadData();
     }
 
@@ -35,28 +36,36 @@ public class OrderDetailCommandServiceImpl implements OrderDetailCommandService 
                 orderdetails.add(orderDetail);
 
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void addOrderDetail(OrderDetail orderDetail) {
+        orderDetail.setId(generateOrderDetailId());
 
         this.orderdetails.add(orderDetail);
     }
 
-    @Override
-    public void removeOrderDetail(OrderDetail orderDetail) {
-        this.orderdetails.remove(orderDetail);
+    private int generateOrderDetailId() {
+        this.loadData();
+
+        Random rand = new Random();
+        int orderDetailId = rand.nextInt(10000)+1;
+        while(getOrderDetailById(orderDetailId) != null) {
+            orderDetailId = rand.nextInt(10000)+1;
+        }
+
+        return orderDetailId;
     }
 
-    @Override
-    public List<OrderDetail> getOrderDetailsByOrderId(int orderId) {
+    private OrderDetail getOrderDetailById(int id) {
+        this.loadData();
 
-        for (OrderDetail orderdetail : orderdetails) {
-            if (orderdetail.getOrderId() == orderId) {
-                return orderdetails;
+        for(OrderDetail orderDetail : orderdetails) {
+            if(orderDetail.getId() == id) {
+                return orderDetail;
             }
         }
 
@@ -64,6 +73,12 @@ public class OrderDetailCommandServiceImpl implements OrderDetailCommandService 
     }
 
     @Override
+    public void removeOrderDetail(OrderDetail orderDetail) {
+        this.orderdetails.remove(orderDetail);
+    }
+
+
+
     public int generateOrderId() {
         Random rand = new Random();
         int orderID = rand.nextInt(10000) + 1;
@@ -72,6 +87,15 @@ public class OrderDetailCommandServiceImpl implements OrderDetailCommandService 
         }
 
         return orderID;
+    }
+
+    public List<OrderDetail> getOrderDetailsByOrderId(int orderId) {
+
+        for( OrderDetail orderDetail : orderdetails ) {
+            if(orderDetail.getOrderId() == orderId) {
+                return orderdetails;
+            }
+        }return null;
     }
 
     @Override
@@ -86,6 +110,16 @@ public class OrderDetailCommandServiceImpl implements OrderDetailCommandService 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String toString() {
+        String text="";
+        for(int i = 0; i < orderdetails.size()-1; i++){
+            text += orderdetails.get(i).toString() + "\n";
+        }
+        text += orderdetails.get(orderdetails.size()-1).toString();
+        return text;
     }
 
 

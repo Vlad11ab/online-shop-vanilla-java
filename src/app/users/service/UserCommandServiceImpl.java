@@ -21,7 +21,7 @@ public class UserCommandServiceImpl implements UserCommandService {
     public UserCommandServiceImpl() {
         users = new ArrayList<>();
 
-        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/Users/Data/Users.txt";
+        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/users/data/Users.txt";
         this.loadData();
     }
 

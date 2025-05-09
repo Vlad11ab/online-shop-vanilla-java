@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class OrderDetailQueryServiceImpl implements OrderDetailQueryService {
@@ -14,17 +15,20 @@ public class OrderDetailQueryServiceImpl implements OrderDetailQueryService {
 
     public OrderDetailQueryServiceImpl() {
         orderdetails = new ArrayList<>();
+
+        this.loadData();
     }
 
-    @Override
+
     public void loadData() {
 
         try {
-            String filepath = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/OrderDetail/Data/OrderDetails.txt";
+            String filepath = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/orderdetail/data/OrderDetails.txt";
             File file = new File(filepath);
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
+                this.orderdetails.add(new OrderDetail(line));
             }
         }catch(Exception e) {
             e.printStackTrace();
@@ -33,17 +37,15 @@ public class OrderDetailQueryServiceImpl implements OrderDetailQueryService {
 
 
     @Override
-    public  void saveData(){
+    public List<OrderDetail> getOrderDetailsByOrderId(int orderId) {
 
-        String filepath = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/OrderDetail/Data/OrderDetails.txt";
-        try{
-            FileWriter fileWriter = new FileWriter(filepath);
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-            printWriter.print(this);
-            printWriter.close();
-        }catch (Exception e){
-            e.printStackTrace();
+        for (OrderDetail orderdetail : orderdetails) {
+            if (orderdetail.getOrderId() == orderId) {
+                return orderdetails;
+            }
         }
+
+        return null;
     }
 
     @Override
@@ -58,6 +60,7 @@ public class OrderDetailQueryServiceImpl implements OrderDetailQueryService {
 
     @Override
     public void afisare() {
+        this.loadData();
         System.out.println(this);
     }
 

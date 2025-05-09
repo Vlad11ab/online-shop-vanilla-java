@@ -135,9 +135,9 @@ public class ViewCustomer {
             int orderId = Integer.parseInt(scanner.nextLine());
 
 
-            if(orderCommandService.checkOrderId(orderId)){
+            if(orderQueryService.checkOrderId(orderId)){
 
-                List <OrderDetail> orderdetails = orderDetailCommandService.getOrderDetailsByOrderId(orderId);
+                List <OrderDetail> orderdetails = orderDetailQueryService.getOrderDetailsByOrderId(orderId);
 
                     for(OrderDetail orderDetail : orderdetails) {
                         if (orderDetail.getOrderId() == orderId) {
@@ -166,7 +166,7 @@ public class ViewCustomer {
         System.out.println("Comenzile clientului sunt: ");
 
 
-        List<Order> clientOrders = this.orderCommandService.getOrdersByCustomerId(customer.getId());
+        List<Order> clientOrders = this.orderQueryService.getOrdersByCustomerId(customer.getId());
         for(Order order : clientOrders){
             System.out.println("Comanda: " + order + " cu ID-ul: " + order.getId());
 
@@ -192,7 +192,7 @@ public class ViewCustomer {
         System.out.println("Introduceti numele produsului pe care doriti sa-l stergeti din cos: ");
         String productsname = scanner.nextLine();
 
-        Product product = productCommandService.getProductByName(productsname);
+        Product product = productQueryService.getProductByName(productsname);
 
         if(product == null){
             System.out.println("Produsul nu exista!");
@@ -222,17 +222,17 @@ public class ViewCustomer {
         else {
             List<CartItem> cartItems = cart.getCartItems();
 
-            int orderId = orderCommandService.generateOrderId();
-            Order order =  new Order(orderId,this.customer.getId(),this.cart.totalPrice(),"aasdad");
+
+            Order order =  new Order(this.customer.getId(),this.cart.totalPrice(),"aasdad");
+            this.orderCommandService.addOrder(order);
             for (CartItem cartItem : cartItems) {
-                int orderDetailsId = orderDetailCommandService.generateOrderId();
-                OrderDetail orderDetail = new OrderDetail(orderDetailsId, orderId, cartItem.getProduct().getId(), cartItem.getProduct().getId(), cartItem.getQuantity());
+                OrderDetail orderDetail = new OrderDetail(order.getId(), cartItem.getProduct().getId(), cartItem.getProduct().getId(), cartItem.getQuantity());
                 orderDetailCommandService.addOrderDetail(orderDetail);
 
             }
-            this.orderCommandService.addOrder(order);
-            this.orderQueryService.saveData();
-            this.orderDetailQueryService.saveData();
+
+            this.orderCommandService.saveData();
+            this.orderDetailCommandService.saveData();
             System.out.println("Comanda cu Id-ul:" + order.getId()+ " a fost trimisa cu succes");
         }
 
@@ -247,7 +247,7 @@ public class ViewCustomer {
         System.out.println("Introduceti numele produsului pe care doriti sa-l editati: ");
         String productname = scanner.nextLine();
 
-        Product product = productCommandService.getProductByName(productname);
+        Product product = productQueryService.getProductByName(productname);
 
         if(product == null){
             System.out.println("Produsul nu exista!");
@@ -278,10 +278,10 @@ public class ViewCustomer {
 
         System.out.println("Introduceti numele produsului dorit: ");
         String productName = scanner.nextLine();
-        Product product = productCommandService.getProductByName(productName);
+        Product product = productQueryService.getProductByName(productName);
         //todo:veriific existenta produsului
         //todo:Creez un cartItem cu detaliile din produs
-         if(productCommandService.foundProduct(product)){
+         if(productQueryService.foundProduct(product)){
              CartItem cartItem = new CartItem(product,1);
              cart.addToCart(cartItem);
          }

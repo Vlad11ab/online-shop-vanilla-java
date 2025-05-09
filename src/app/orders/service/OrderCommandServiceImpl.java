@@ -19,7 +19,7 @@ public class OrderCommandServiceImpl implements OrderCommandService {
     public OrderCommandServiceImpl() {
         orders = new ArrayList<>();
 
-        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/Orders/Data/Orders.txt";
+        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/orders/data/Orders.txt";
         this.loadData();
     }
 
@@ -41,58 +41,13 @@ public class OrderCommandServiceImpl implements OrderCommandService {
 
     @Override
     public void addOrder(Order order) {
+        order.setId(generateOrderId());
         orders.add(order);
     }
 
     @Override
     public void removeOrder(Order order) {
         orders.remove(order);
-    }
-
-    @Override
-    public Order getOrderById(int id) {
-
-
-        for(Order order : orders) {
-            if(order.getId() == id) {
-                return order;
-            }
-        }
-
-        return null;
-    }
-
-    @Override
-    public boolean checkOrderId(int orderId){
-        for(Order order : orders) {
-            if(order.getId() == orderId) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public int generateOrderId() {
-        Random rand = new Random();
-        int orderID = rand.nextInt(10000)+1;
-        while(getOrderById(orderID) != null) {
-            orderID = rand.nextInt(10000)+1;
-        }
-
-        return orderID;
-    }
-
-    @Override
-    public List<Order> getOrdersByCustomerId(int customerId) {
-
-        List<Order> customersOrders = new ArrayList<>();
-        for(Order order : orders) {
-            if(order.getCustomerId() == customerId) {
-                customersOrders.add(order);
-            }
-        }
-        return customersOrders;
     }
 
     @Override
@@ -109,6 +64,30 @@ public class OrderCommandServiceImpl implements OrderCommandService {
         }
 
 
+    }
+
+    private int generateOrderId() {
+        this.loadData();
+
+        Random rand = new Random();
+        int orderID = rand.nextInt(10000)+1;
+        while(getOrderById(orderID) != null) {
+            orderID = rand.nextInt(10000)+1;
+        }
+
+        return orderID;
+    }
+
+    private Order getOrderById(int id) {
+        this.loadData();
+
+        for(Order order : orders) {
+            if(order.getId() == id) {
+                return order;
+            }
+        }
+
+        return null;
     }
 
 

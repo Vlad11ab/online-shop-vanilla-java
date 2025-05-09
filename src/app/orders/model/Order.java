@@ -14,6 +14,12 @@ public class Order {
         this.ammount = ammount;
         this.shippingAddres = shippingAddres;
     }
+    public Order(int customerId, int ammount, String shippingAddres) {
+
+        this.customerId = customerId;
+        this.ammount = ammount;
+        this.shippingAddres = shippingAddres;
+    }
 
     //Constructor cu String
     public Order(String text){

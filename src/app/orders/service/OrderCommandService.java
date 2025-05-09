@@ -11,14 +11,4 @@ public interface OrderCommandService extends Data {
 
     void removeOrder(Order order);
 
-    Order getOrderById(int id);
-
-    boolean checkOrderId(int id);
-
-    int generateOrderId();
-
-    List<Order> getOrdersByCustomerId(int customerId);
-
-
-
 }

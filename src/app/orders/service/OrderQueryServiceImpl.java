@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class OrderQueryServiceImpl implements OrderQueryService {
@@ -18,7 +19,7 @@ public class OrderQueryServiceImpl implements OrderQueryService {
     public OrderQueryServiceImpl() {
         orders = new ArrayList<>();
 
-        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/Orders/Data/Orders.txt";
+        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/orders/data/Orders.txt";
         this.loadData();
     }
 
@@ -54,6 +55,33 @@ public class OrderQueryServiceImpl implements OrderQueryService {
     }
 
     @Override
+    public List<Order> getOrdersByCustomerId(int customerId) {
+        this.loadData();
+
+        List<Order> customersOrders = new ArrayList<>();
+        for(Order order : orders) {
+            if(order.getCustomerId() == customerId) {
+                customersOrders.add(order);
+            }
+        }
+        return customersOrders;
+    }
+
+
+    @Override
+    public boolean checkOrderId(int orderId){
+        this.loadData();
+
+        for(Order order : orders) {
+            if(order.getId() == orderId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    @Override
     public String toString() {
         String text="";
         for(int i = 0; i < orders.size()-1; i++){
@@ -65,11 +93,15 @@ public class OrderQueryServiceImpl implements OrderQueryService {
 
     @Override
     public void afisare() {
+        this.loadData();
+
         System.out.println(this);
     }
 
     @Override
     public void showAllOrdersIds(){
+        this.loadData();
+
         for(Order order : orders) {
             System.out.println(order.getId());
         }

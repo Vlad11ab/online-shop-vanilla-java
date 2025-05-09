@@ -1,10 +1,13 @@
 package app.orderdetail.service;
 
+import app.orderdetail.model.OrderDetail;
 import app.system.utils.Data;
 
-public interface OrderDetailQueryService extends Data {
+import java.util.List;
+
+public interface OrderDetailQueryService  {
 
     void afisare();
 
-
+    List<OrderDetail> getOrderDetailsByOrderId(int orderId);
 }

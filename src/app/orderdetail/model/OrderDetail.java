@@ -15,6 +15,12 @@ public class OrderDetail {
         this.price = price;
         this.quantity = quantity;
     }
+    public OrderDetail( int orderId,int productId, float price, int quantity) {
+        this.productId = productId;
+        this.orderId = orderId;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
     //Constructor cu String
     public OrderDetail(String text) {
