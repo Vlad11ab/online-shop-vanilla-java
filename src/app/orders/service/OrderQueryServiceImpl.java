@@ -24,6 +24,7 @@ public class OrderQueryServiceImpl implements OrderQueryService {
     }
 
     public void loadData() {
+        orders.clear();
 
         File file = new File(filename);
 

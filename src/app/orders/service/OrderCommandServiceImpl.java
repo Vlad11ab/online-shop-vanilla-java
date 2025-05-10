@@ -25,6 +25,7 @@ public class OrderCommandServiceImpl implements OrderCommandService {
 
     @Override
     public void loadData() {
+        orders.clear();
 
         File file = new File(filename);
 
@@ -90,6 +91,15 @@ public class OrderCommandServiceImpl implements OrderCommandService {
         return null;
     }
 
+    @Override
+    public String toString() {
+        String text ="";
+        for(int i = 0; i <orders.size()-1; i++){
+            text += orders.get(i).toString() + "\n";
+        }
+        text += orders.get(orders.size()-1).toString();
+        return text;
+    }
 
 
 

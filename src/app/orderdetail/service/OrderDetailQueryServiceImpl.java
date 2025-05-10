@@ -21,6 +21,7 @@ public class OrderDetailQueryServiceImpl implements OrderDetailQueryService {
 
 
     public void loadData() {
+        orderdetails.clear();
 
         try {
             String filepath = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/orderdetail/data/OrderDetails.txt";
@@ -39,13 +40,17 @@ public class OrderDetailQueryServiceImpl implements OrderDetailQueryService {
     @Override
     public List<OrderDetail> getOrderDetailsByOrderId(int orderId) {
 
+        this.loadData();
+        List<OrderDetail> od = new ArrayList<>();
+
+
         for (OrderDetail orderdetail : orderdetails) {
             if (orderdetail.getOrderId() == orderId) {
-                return orderdetails;
+                od.add(orderdetail);
             }
         }
 
-        return null;
+        return od;
     }
 
     @Override

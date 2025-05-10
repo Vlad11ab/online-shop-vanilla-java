@@ -149,19 +149,6 @@ public class ViewCustomer {
             else System.out.println("Id invalid!");
         }
 
-
-//        //todo: getAllProductsByOiD din productssERVICE
-//        List <Order> clientOrders = this.orderService.getOrdersByCustomerId(customer.getId());
-//
-//
-//        for(Order order : clientOrders){
-//            for(OrderDetail orderDetail : orderdetails) {
-//            System.out.println(orderDetail);
-//            }
-//
-//        }
-
-
     private void select7(){
         System.out.println("Comenzile clientului sunt: ");
 
@@ -216,7 +203,7 @@ public class ViewCustomer {
         System.out.println("Doriti sa trimiteti comanda?   R:DA/NU ");
         String choice = scanner.nextLine();
 
-        if(!choice.equals("DA")){
+        if(!choice.equalsIgnoreCase("DA")){
             System.out.println("Comanda nu va fi trimisa ");
         }
         else {

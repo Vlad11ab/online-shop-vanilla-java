@@ -30,6 +30,7 @@ public class Order {
         this.shippingAddres = tokens[3];
     }
 
+
     //Setters
     public void setId(int id) { this.id = id; }
     public void setCustomerId(int customerId) {

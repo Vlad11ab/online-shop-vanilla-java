@@ -26,6 +26,7 @@ public class OrderDetailCommandServiceImpl implements OrderDetailCommandService 
 
     @Override
     public void loadData() {
+        orderdetails.clear();
 
         File file = new File(filename);
 
@@ -46,6 +47,7 @@ public class OrderDetailCommandServiceImpl implements OrderDetailCommandService 
         orderDetail.setId(generateOrderDetailId());
 
         this.orderdetails.add(orderDetail);
+        this.saveData();
     }
 
     private int generateOrderDetailId() {
