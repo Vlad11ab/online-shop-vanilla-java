@@ -7,13 +7,17 @@ import app.orderdetail.service.OrderDetailCommandServiceSingleton;
 import app.orderdetail.service.OrderDetailQueryService;
 import app.orderdetail.service.OrderDetailQueryServiceSingleton;
 import app.orders.model.Order;
+import app.orders.service.OrderQueryService;
+import app.orders.service.OrderQueryServiceSingleton;
+import app.products.model.Product;
 import app.view.ViewLogin;
+
+import javax.swing.text.View;
 
 public class Main {
     public static void main(String[] args) {
 
-            ViewLogin viewLogin = new ViewLogin();
+        ViewLogin viewLogin = new ViewLogin();
 
     }
-
-    }
+}

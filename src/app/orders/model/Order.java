@@ -30,6 +30,45 @@ public class Order {
         this.shippingAddres = tokens[3];
     }
 
+    private Order(OrderBuilder builder){
+        this.id = builder.id;
+        this.customerId = builder.customerId;
+        this.ammount = builder.ammount;
+        this.shippingAddres = builder.shippingAddres;
+    }
+
+    public static class OrderBuilder {
+        private int id;
+        private int customerId;
+        private int ammount;
+        private String shippingAddres;
+
+        public OrderBuilder id(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public OrderBuilder customerId(int customerId){
+            this.customerId = customerId;
+            return this;
+        }
+
+        public OrderBuilder ammount(int ammount) {
+            this.ammount = ammount;
+            return this;
+        }
+
+        public OrderBuilder shippingAddres(String shippingAddres) {
+            this.shippingAddres = shippingAddres;
+            return this;
+        }
+
+        public Order build() {
+            return new Order(this);
+
+        }
+    }
+
 
     //Setters
     public void setId(int id) { this.id = id; }

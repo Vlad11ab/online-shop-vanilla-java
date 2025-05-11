@@ -30,6 +30,59 @@ public class Product {
        this.stock = Integer.parseInt(tokens[5]);
     }
 
+    private Product (ProductBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.price = builder.price;
+        this.weight = builder.weight;
+        this.category = builder.category;
+        this.stock = builder.stock;
+    }
+
+    public static class ProductBuilder {
+        private int id;
+        private String name;
+        private int price;  //lei
+        private int weight;  //gr/ml
+        private String category;
+        private int stock; //buc
+
+        public ProductBuilder id(int id){
+            this.id = id;
+            return this;
+        }
+
+        public ProductBuilder name(String name){
+            this.name = name;
+            return this;
+        }
+
+        public ProductBuilder price(int price){
+            this.price = price;
+            return this;
+        }
+
+        public ProductBuilder weight(int weight){
+            this.weight = weight;
+            return this;
+        }
+
+        public ProductBuilder category(String category){
+            this.category = category;
+            return this;
+        }
+
+        public ProductBuilder stock(int stock){
+            this.stock = stock;
+            return this;
+        }
+
+        public Product build() {
+            return new Product(this);
+        }
+
+    }
+
     //Setters
     public void setId(int id){ this.id = id; }
     public void setName(String name){ this.name = name; }

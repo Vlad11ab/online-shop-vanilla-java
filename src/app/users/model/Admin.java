@@ -21,6 +21,55 @@ public class Admin extends User {
         this.adminPassword = tokens[6];
     }
 
+    private Admin (AdminBuilder builder){
+        super(builder.id, builder.fullName, builder.email, builder.password);
+        this.adminName = builder.adminName;
+        this.adminPassword = builder.adminPassword;
+    }
+
+    public static class AdminBuilder {
+        private int id;
+        private String fullName;
+        private String email;
+        private String password;
+        private String adminName;
+        private String adminPassword;
+
+        public AdminBuilder id(int id){
+            this.id = id;
+            return this;
+        }
+
+        public AdminBuilder fullName(String fullName){
+            this.fullName = fullName;
+            return this;
+        }
+
+        public AdminBuilder email(String email){
+            this.email = email;
+            return this;
+        }
+
+        public AdminBuilder password(String password){
+            this.password = password;
+            return this;
+        }
+
+        public AdminBuilder adminName(String adminName){
+            this.adminName = adminName;
+            return this;
+        }
+
+        public AdminBuilder adminPassword(String adminPassword) {
+            this.adminPassword = adminPassword;
+            return this;
+        }
+
+        public Admin build() {
+            return new Admin(this);
+        }
+    }
+
     //Setters
 //    public void setId(int id) {
 //        this.id = id;
