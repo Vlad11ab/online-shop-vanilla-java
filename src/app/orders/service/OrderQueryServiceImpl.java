@@ -39,21 +39,7 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         }
     }
 
-    @Override
-    public  void saveData(){
 
-        File file = new File(filename);
-        try{
-            FileWriter fileWriter = new FileWriter(file);
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-            printWriter.print(this);
-            printWriter.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-    }
 
     @Override
     public List<Order> getOrdersByCustomerId(int customerId) {

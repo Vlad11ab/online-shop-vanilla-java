@@ -1,6 +1,7 @@
-CUSTOMER,1,vlad@gmail.com,Vlad@112,Breazu Vlad,Alee Alexandriei,Romania,0730121119
-CUSTOMER,2,denis@gmail.com,Denis@112,Denis Toropoc,Strada Pompierilor,Romania,073012120
-CUSTOMER,3,david@gmail.com,David@112,David Simion,Fundatura Cucului,Romania,0730121121
-CUSTOMER,4,dobre@gmail.com,Dobre@112,Dobre Andrei,Strada Grivitei,Romania,073012122
-CUSTOMER,5,matei@gmail.com,Matei@112,Chiru Matei,Strada Pasarelei,Romania,073012123
-ADMIN,1,admin@gmail.com,Admin@112,Admin Admin,AdminName,AdminPassword
+CUSTOMER,1,Breazu Vlad,vlad@gmail.com,vladuser,Vlad@112,Alee Alexandriei,Romania,0730121119
+CUSTOMER,2,Denis Toropoc,denis@gmail.com,denisuser,Denis@112,Strada Pompierilor,Romania,073012120
+CUSTOMER,3,David Simion,david@gmail.com,daviduser,David@112,Fundatura Cucului,Romania,0730121121
+CUSTOMER,4,Dobre Andrei,dobre@gmail.com,dobreuser,Dobre@112,Strada Grivitei,Romania,073012122
+CUSTOMER,5,Chiru Matei,matei@gmail.com,mateiuser,Matei@112,Strada Pasarelei,Romania,073012123
+ADMIN,10,Admin Admin,admin@gmail.com,adminuser,Admin@112,AdminPassword,AdminPassword
+

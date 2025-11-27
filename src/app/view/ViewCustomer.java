@@ -218,8 +218,8 @@ public class ViewCustomer {
 
             }
 
-            this.orderCommandService.saveData();
-            this.orderDetailCommandService.saveData();
+//            this.orderCommandService.saveData();
+//            this.orderDetailCommandService.saveData();
             System.out.println("Comanda cu Id-ul:" + order.getId()+ " a fost trimisa cu succes");
         }
 

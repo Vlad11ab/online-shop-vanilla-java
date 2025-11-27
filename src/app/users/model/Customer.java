@@ -7,8 +7,8 @@ public class Customer extends User {
     private String phone;
 
     //Constructor
-    public Customer(int id, String fullName, String email, String password, String defaultShippingAddress, String country, String phone) {
-        super(id, fullName, email, password);
+    public Customer(int id, String fullName, String email, String username, String password, String defaultShippingAddress, String country, String phone) {
+        super(id, fullName, email, username, password);
 //        this.id = id;
         this.defaultShippingAddress = defaultShippingAddress;
         this.country = country;
@@ -20,13 +20,13 @@ public class Customer extends User {
         super(text);
         String [] tokens = text.split(",");
         //token[1] id, token[2] email, token[3] password token[4] fullName
-        this.defaultShippingAddress = tokens[5];
-        this.country = tokens[6];
-        this.phone = tokens[7];
+        this.defaultShippingAddress = tokens[6];
+        this.country = tokens[7];
+        this.phone = tokens[8];
     }
 
     private Customer (CustomerBuilder builder) {
-        super(builder.id,builder.fullName,builder.email,builder.password);
+        super(builder.id,builder.fullName,builder.email,builder.username, builder.password);
         this.defaultShippingAddress = builder.defaultShippingAddress;
         this.country = builder.country;
         this.phone = builder.phone;
@@ -36,6 +36,7 @@ public class Customer extends User {
         private int id;
         private String fullName;
         private String email;
+        private String username;
         private String password;
         private String defaultShippingAddress;
         private String country;
@@ -53,6 +54,11 @@ public class Customer extends User {
 
         public CustomerBuilder email(String email){
             this.email = email;
+            return this;
+        }
+
+        public CustomerBuilder username(String username) {
+            this.username = username;
             return this;
         }
 

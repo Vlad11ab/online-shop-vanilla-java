@@ -6,8 +6,8 @@ public class Admin extends User {
     private String adminName;
     private String adminPassword;
 
-    public Admin(int id, String email, String fullName, String password, String adminName, String adminPassword) {
-        super(id, fullName, email, password);
+    public Admin(int id, String fullName, String email, String username, String password, String adminName, String adminPassword) {
+        super(id, fullName, email, username, password);
 //        this.id = id;
         this.adminName = adminName;
         this.adminPassword = adminPassword;
@@ -16,13 +16,12 @@ public class Admin extends User {
     public Admin(String text){
         super(text);
         String [] tokens = text.split(",");
-        //token[1] id, token[2] email, token[3] password token[4] fullName
-        this.adminName = tokens[5];
-        this.adminPassword = tokens[6];
+        this.adminName = tokens[6];
+        this.adminPassword = tokens[7];
     }
 
     private Admin (AdminBuilder builder){
-        super(builder.id, builder.fullName, builder.email, builder.password);
+        super(builder.id, builder.fullName, builder.email, builder.username, builder.password);
         this.adminName = builder.adminName;
         this.adminPassword = builder.adminPassword;
     }
@@ -31,6 +30,7 @@ public class Admin extends User {
         private int id;
         private String fullName;
         private String email;
+        private String username;
         private String password;
         private String adminName;
         private String adminPassword;
@@ -47,6 +47,11 @@ public class Admin extends User {
 
         public AdminBuilder email(String email){
             this.email = email;
+            return this;
+        }
+
+        public AdminBuilder username(String username){
+            this.username = username;
             return this;
         }
 

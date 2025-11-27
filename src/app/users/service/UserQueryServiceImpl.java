@@ -1,99 +1,49 @@
 package app.users.service;
 
-import app.users.model.Admin;
+import app.users.exceptions.UserNotFoundException;
 import app.users.model.Customer;
 import app.users.model.User;
+import app.users.repository.UserRepository;
+import app.users.repository.UserRepositorySingleton;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Optional;
 
 public class UserQueryServiceImpl implements UserQueryService {
 
-    private List<User> users;
+    UserRepository userRepository;
 
-    private String filename;
 
     public UserQueryServiceImpl() {
-        users = new ArrayList<>();
-
-        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/users/data/Users.txt";
-        this.loadData();
-    }
-
-    @Override
-    public void loadData() {
-        File file = new File(filename);
-
-        try(Scanner scanner = new Scanner(file)) {
-            while(scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] split = line.split(",");
-                switch (split[0]) {
-                    case "CUSTOMER":
-                        this.users.add(new Customer(line));
-                        break;
-                    case "ADMIN":
-                        this.users.add(new Admin(line));
-                        break;
-                }
-
-            }
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
+        this.userRepository = UserRepositorySingleton.getINSTANCE();
     }
 
     @Override
     public void showCustomers() {
-        for(User user : users) {
 
-            if(user instanceof Customer) {
-                Customer customer = (Customer) user;
-                System.out.println(customer.toString());
-            }
-
-        }
+        userRepository.listUsers().stream()
+                .filter(user -> user instanceof Customer)
+                .forEach(System.out::println);
 
     }
 
     @Override
     public void showUsers() {
 
-        for(User user : users){
-
-            if(user instanceof Admin){
-                Admin admin = (Admin) user;
-                admin.afisare();
-            }
-
-            else if(user instanceof Customer){
-                Customer customer = (Customer) user;
-                customer.afisare();
-            }
-
-        }
-
+        userRepository.listUsers()
+                .forEach(System.out::println);
 
     }
 
-    @Override
-    public void saveData() {
+    public User loginUser(String username, String password) throws UserNotFoundException {
 
-        File file = new File(filename);
-        try{
-            FileWriter fileWriter = new FileWriter(file);
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-            printWriter.print(this);
-            printWriter.close();
-        }catch (Exception e){
-            e.printStackTrace();
+        Optional<User> searchedUser = userRepository.findUserByUsernameAndPassword(username,password);
+
+        if(!searchedUser.isPresent()) {
+            throw new UserNotFoundException();
+        }
+
+        return searchedUser.get();
         }
 
 
@@ -106,4 +56,7 @@ public class UserQueryServiceImpl implements UserQueryService {
 
 
 
-}
+
+
+
+

@@ -1,13 +1,17 @@
 package app.view;
 
+import app.users.exceptions.UserNotFoundException;
 import app.users.model.Admin;
 import app.users.model.Customer;
 import app.users.model.User;
+import app.users.repository.UserRepository;
+import app.users.repository.UserRepositorySingleton;
 import app.users.service.UserCommandService;
 import app.users.service.UserCommandServiceSingleton;
 import app.users.service.UserQueryService;
 import app.users.service.UserQueryServiceSingleton;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class ViewLogin {
@@ -57,29 +61,40 @@ public class ViewLogin {
         String username = scanner.nextLine();
         System.out.println("Password: ");
         String password = scanner.nextLine();
-
-        User user = userCommandService.getUserForLogin(username, password); //username = fullName
-
-        if(user != null){
-
-            if(user instanceof Customer){
+        try{
+            User user = userQueryService.loginUser(username,password);
+            if (user instanceof Customer) {
                 Customer customer = (Customer) user;
-                System.out.println("Login Successful!");
+                System.out.println("Successfuly logged in as Customer: " + customer.getUsername());
                 ViewCustomer viewCustomer = new ViewCustomer(customer);
-            }
-            else if(user instanceof Admin){
+            } else if (user instanceof Admin) {
                 Admin admin = (Admin) user;
-                System.out.println("Admin Login Successful!");
+                System.out.println("Successfuly logged in as Admin: " + admin.getAdminName());
                 ViewAdmin viewAdmin = new ViewAdmin(admin);
-            }
-        }else{
-            System.out.println("Invalid username or password!");
-        }
+            } else System.out.println("Invalid Credentials!");
+        }catch (UserNotFoundException userNotFoundException){
+            System.out.println(userNotFoundException.getMessage());
+
+    }
 
 
     }
 
     private void select2(){
+        System.out.println("Introduceti un username: ");
+        String registrationUsername = scanner.nextLine();
+        System.out.println("Introduceti o parola: ");
+        String registrationPassword = scanner.nextLine();
+        System.out.println("Introduceti adresa de email: ");
+        String registrationemail = scanner.nextLine();
+        System.out.println("Introduceti numele complet: ");
+        String registrationFullName = scanner.nextLine();
+
+
+        User user = new Customer(100,registrationFullName,registrationemail,registrationUsername,registrationPassword,"", "","");
+
+
+
 
     }
 

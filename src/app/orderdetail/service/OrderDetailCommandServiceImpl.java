@@ -21,10 +21,9 @@ public class OrderDetailCommandServiceImpl implements OrderDetailCommandService 
         orderdetails = new ArrayList<>();
 
         this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/orderdetail/data/OrderDetails.txt";
-        this.loadData();
+//        this.loadData();
     }
 
-    @Override
     public void loadData() {
         orderdetails.clear();
 
@@ -100,7 +99,6 @@ public class OrderDetailCommandServiceImpl implements OrderDetailCommandService 
         }return null;
     }
 
-    @Override
     public void saveData() {
 
         File file = new File(filename);
