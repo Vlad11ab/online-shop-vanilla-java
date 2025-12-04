@@ -1,5 +1,6 @@
 package app.orders.repository;
 
+import app.orderdetail.model.OrderDetail;
 import app.orders.model.Order;
 
 import java.io.*;
@@ -17,15 +18,19 @@ public class OrderRepositoryImpl implements OrderRepository{
         this.loadData();
     }
 
+    @Override
     public void loadData() {
         File file = new File(filename);
 
-        try(Scanner scanner = new Scanner(file)){
-            String line = scanner.nextLine();
-            Order order = new Order(line);
-            orders.add(order);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Order order = new Order(line);
+                orders.add(order);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -87,5 +92,17 @@ public class OrderRepositoryImpl implements OrderRepository{
         return orderID;
     }
 
+    @Override
+    public String toString() {
+
+        StringBuilder text;
+        text = new StringBuilder();
+        int i;
+        for( i=0 ;i<orders.size()-1; i++){
+            text.append(orders.get(i)+"\n");
+        }
+        text.append(orders.get(i));
+        return String.valueOf(text);
+    }
 
 }

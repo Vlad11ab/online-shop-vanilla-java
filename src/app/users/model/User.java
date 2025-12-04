@@ -53,6 +53,7 @@ public abstract class User {
         public UserBuilder password(String password) {
             this.password = password;
             return this;
+
         }
     }
 

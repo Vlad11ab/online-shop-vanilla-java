@@ -58,12 +58,5 @@ public class ProductQueryServiceImpl implements ProductQueryService {
         }
     }
 
-    @Override
-    public String toString(){
-
-        return productRepository.listProducts().toString();
-    }
-
-
 
 }

@@ -4,6 +4,7 @@ import app.orderdetail.service.OrderDetailCommandService;
 import app.orderdetail.service.OrderDetailCommandServiceSingleton;
 import app.orderdetail.service.OrderDetailQueryService;
 import app.orderdetail.service.OrderDetailQueryServiceSingleton;
+import app.orders.exceptions.OrderNotFoundException;
 import app.orders.service.OrderCommandService;
 import app.orders.service.OrderCommandServiceSingleton;
 import app.orders.service.OrderQueryService;
@@ -141,8 +142,8 @@ public class ViewCustomer {
                 List<OrderDetail> orderdetails = null;
                 try {
                     orderdetails = orderDetailQueryService.findOrderDetailsByOrderId(orderId);
-                } catch (RuntimeException e) {
-                    throw new RuntimeException(e);
+                } catch (OrderNotFoundException orderNotFoundException) {
+                    System.out.println(orderNotFoundException.getMessage());
                 }
 
                     for(OrderDetail orderDetail : orderdetails) {
@@ -188,8 +189,8 @@ public class ViewCustomer {
         Product product = null;
         try {
             product = productQueryService.findProductByName(productsname);
-        } catch (ProductNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (ProductNotFoundException productNotFoundException) {
+            System.out.println(productNotFoundException.getMessage());
         }
 
         if(product == null){
@@ -220,8 +221,7 @@ public class ViewCustomer {
         else {
             List<CartItem> cartItems = cart.getCartItems();
 
-
-            Order order =  new Order(this.customer.getId(),this.cart.totalPrice(),"aasdad");
+            Order order =  new Order(this.customer.getId(),this.cart.totalPrice(),"ShippingAddres");
             this.orderCommandService.addOrder(order);
             for (CartItem cartItem : cartItems) {
                 OrderDetail orderDetail = new OrderDetail(order.getId(), cartItem.getProduct().getId(), cartItem.getProduct().getId(), cartItem.getQuantity());
@@ -229,8 +229,6 @@ public class ViewCustomer {
 
             }
 
-//            this.orderCommandService.saveData();
-//            this.orderDetailCommandService.saveData();
             System.out.println("Comanda cu Id-ul:" + order.getId()+ " a fost trimisa cu succes");
         }
 
@@ -248,8 +246,8 @@ public class ViewCustomer {
         Product product = null;
         try {
             product = productQueryService.findProductByName(productname);
-        } catch (ProductNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (ProductNotFoundException productNotFoundException) {
+            System.out.println(productNotFoundException.getMessage());
         }
 
         if(product == null){
@@ -284,8 +282,8 @@ public class ViewCustomer {
         Product product = null;
         try {
             product = productQueryService.findProductByName(productName);
-        } catch (ProductNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (ProductNotFoundException productNotFoundException) {
+            System.out.println(productNotFoundException.getMessage());
         }
         //todo:veriific existenta produsului
         //todo:Creez un cartItem cu detaliile din produs

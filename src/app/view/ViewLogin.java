@@ -1,5 +1,6 @@
 package app.view;
 
+import app.users.exceptions.UserAlreadyExistException;
 import app.users.exceptions.UserNotFoundException;
 import app.users.model.Admin;
 import app.users.model.Customer;
@@ -87,9 +88,19 @@ public class ViewLogin {
         System.out.println("Introduceti numele complet: ");
         String registrationFullName = scanner.nextLine();
 
+        User user = new Customer.CustomerBuilder()
+                .id(100)
+                .email(registrationemail)
+                .fullName(registrationFullName)
+                .username(registrationUsername)
+                .password(registrationPassword)
+                .build();
 
-
-
+        try {
+            userCommandService.registerUser(user);
+        } catch (UserAlreadyExistException userAlreadyExistException) {
+            System.out.println(userAlreadyExistException.getMessage());
+        }
 
 
     }

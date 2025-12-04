@@ -1,5 +1,6 @@
 package app.products.repository;
 
+import app.orderdetail.model.OrderDetail;
 import app.products.model.Product;
 
 import java.io.File;
@@ -85,5 +86,17 @@ public class ProductRepositoryImpl implements ProductRepository{
     public List<Product> listProducts() {
 
         return products;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder text;
+        text = new StringBuilder();
+
+        for(Product p : products){
+            text.append(p).append(", ");
+        }
+        return String.valueOf(text);
     }
 }

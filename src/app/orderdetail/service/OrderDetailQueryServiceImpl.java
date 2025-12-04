@@ -1,17 +1,12 @@
 package app.orderdetail.service;
 
-import app.orderdetail.exceptions.OrderNotFoundException;
 import app.orderdetail.model.OrderDetail;
 import app.orderdetail.repository.OrderDetailRepository;
 import app.orderdetail.repository.OrderDetailRepositorySingleton;
+import app.orders.exceptions.OrderNotFoundException;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 public class OrderDetailQueryServiceImpl implements OrderDetailQueryService {
 
@@ -21,11 +16,6 @@ public class OrderDetailQueryServiceImpl implements OrderDetailQueryService {
         orderDetailRepository = OrderDetailRepositorySingleton.getINSTANCE();
     }
 
-    @Override
-    public String toString() {
-
-        return orderDetailRepository.listOrderDetails().toString();
-    }
 
     @Override
     public void afisare() {

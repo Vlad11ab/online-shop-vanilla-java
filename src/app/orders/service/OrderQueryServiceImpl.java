@@ -36,13 +36,6 @@ public class OrderQueryServiceImpl implements OrderQueryService {
 
     }
 
-
-    @Override
-    public String toString() {
-
-        return orderRepository.listOrders().toString();
-    }
-
     @Override
     public void afisare() {
 

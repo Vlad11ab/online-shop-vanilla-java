@@ -1,7 +1,6 @@
-CUSTOMER,1,Breazu Vlad,vlad@gmail.com,vladuser,Vlad@112,Alee Alexandriei,Romania,0730121119
-CUSTOMER,2,Denis Toropoc,denis@gmail.com,denisuser,Denis@112,Strada Pompierilor,Romania,073012120
-CUSTOMER,3,David Simion,david@gmail.com,daviduser,David@112,Fundatura Cucului,Romania,0730121121
-CUSTOMER,4,Dobre Andrei,dobre@gmail.com,dobreuser,Dobre@112,Strada Grivitei,Romania,073012122
-CUSTOMER,5,Chiru Matei,matei@gmail.com,mateiuser,Matei@112,Strada Pasarelei,Romania,073012123
-ADMIN,10,Admin Admin,admin@gmail.com,adminuser,Admin@112,AdminPassword,AdminPassword
-
+id: 1, fullName: Breazu Vlad, email: vlad@gmail.com, password: Vlad@112 defaultShippingAddress: Alee Alexandrieicountry: Romaniaphone: 
+id: 2, fullName: Denis Toropoc, email: denis@gmail.com, password: Denis@112 defaultShippingAddress: Strada Pompierilorcountry: Romaniaphone: 
+id: 3, fullName: David Simion, email: david@gmail.com, password: David@112 defaultShippingAddress: Fundatura Cuculuicountry: Romaniaphone: 
+id: 4, fullName: Dobre Andrei, email: dobre@gmail.com, password: Dobre@112 defaultShippingAddress: Strada Griviteicountry: Romaniaphone: 
+id: 5, fullName: Chiru Matei, email: matei@gmail.com, password: Matei@112 defaultShippingAddress: Strada Pasareleicountry: Romaniaphone: 
+id: 10, fullName: Admin Admin, email: admin@gmail.com, password: Admin@112Admin{adminName=AdminPassword, adminPassword=AdminPassword}

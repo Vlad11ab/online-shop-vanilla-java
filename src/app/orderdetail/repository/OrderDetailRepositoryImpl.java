@@ -10,20 +10,18 @@ import java.util.stream.Collectors;
 
 public class OrderDetailRepositoryImpl implements OrderDetailRepository{
     private List<OrderDetail> orderdetails;
-    private String orderdetailfilepath;
+    private String filename;
 
     public OrderDetailRepositoryImpl() {
         orderdetails = new ArrayList<>();
 
-        this.orderdetailfilepath = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/orderdetail/data/OrderDetails.txt";
+        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/orderdetail/data/OrderDetails.txt";
         this.loadData();
     }
 
     @Override
     public void loadData() {
-        orderdetails.clear();
-
-        File file = new File(orderdetailfilepath);
+        File file = new File(filename);
 
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
@@ -40,14 +38,14 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository{
     @Override
     public void saveData() {
 
-        File file = new File(orderdetailfilepath);
+        File file = new File(filename);
         try {
             FileWriter fileWriter = new FileWriter(file);
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.print(this);
             printWriter.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -91,6 +89,19 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository{
         }
 
         return orderDetailId;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder text;
+        text = new StringBuilder();
+        int i;
+        for( i=0 ;i<orderdetails.size()-1; i++){
+            text.append(orderdetails.get(i)+"\n");
+        }
+        text.append(orderdetails.get(i));
+        return String.valueOf(text);
     }
 
 
