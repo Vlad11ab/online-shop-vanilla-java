@@ -9,5 +9,6 @@ public interface OrderDetailQueryService  {
 
     void afisare();
 
-    List<OrderDetail> getOrderDetailsByOrderId(int orderId);
+    List<OrderDetail> findOrderDetailsByOrderId(int orderId);
+
 }

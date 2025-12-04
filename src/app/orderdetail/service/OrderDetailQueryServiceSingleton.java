@@ -4,7 +4,7 @@ public class OrderDetailQueryServiceSingleton {
 
     private static class LazyHolder {
 
-        private static final OrderDetailQueryService instance = new OrderDetailQueryServiceImpl();
+        private static final OrderDetailQueryService INSTANCE = new OrderDetailQueryServiceImpl();
     }
 
 
@@ -12,8 +12,8 @@ public class OrderDetailQueryServiceSingleton {
 
     }
 
-    public static OrderDetailQueryService getInstance() {
-        return LazyHolder.instance;
+    public static OrderDetailQueryService getINSTANCE() {
+        return LazyHolder.INSTANCE;
     }
 
 }

@@ -39,14 +39,14 @@ public class ViewAdmin {
 
     public ViewAdmin(Admin admin) {
         this.admin = admin;
-        this.userCommandService = UserCommandServiceSingleton.getInstance();
-        this.userQueryService = UserQueryServiceSingleton.getInstance();
-        this.productCommandService = ProductCommandServiceSingleton.getInstance();
-        this.productQueryService = ProductQueryServiceSingleton.getInstance();
-        this.orderCommandService = OrderCommandServiceSingleton.getInstance();
-        this.orderQueryService = OrderQueryServiceSingleton.getInstance();
-        this.orderDetailCommandService = OrderDetailCommandServiceSingleton.getInstance();
-        this.orderDetailQueryService = OrderDetailQueryServiceSingleton.getInstance();
+        this.userCommandService = UserCommandServiceSingleton.getINSTANCE();
+        this.userQueryService = UserQueryServiceSingleton.getINSTANCE();
+        this.productCommandService = ProductCommandServiceSingleton.getINSTANCE();
+        this.productQueryService = ProductQueryServiceSingleton.getINSTANCE();
+        this.orderCommandService = OrderCommandServiceSingleton.getINSTANCE();
+        this.orderQueryService = OrderQueryServiceSingleton.getINSTANCE();
+        this.orderDetailCommandService = OrderDetailCommandServiceSingleton.getINSTANCE();
+        this.orderDetailQueryService = OrderDetailQueryServiceSingleton.getINSTANCE();
         this.cart = new Cart();
         this.scanner = new Scanner(System.in);
         this.play();

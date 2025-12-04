@@ -75,7 +75,7 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
 
-    public int generateUniqueId() {
+    private int generateUniqueId() {
         Random random = new Random();
         int generatedId = random.nextInt();
 
@@ -111,7 +111,7 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public List<User> listUsers() {
 
-        return users.stream().toList();
+        return users;
 
     }
 

@@ -4,14 +4,11 @@ import app.users.exceptions.UserNotFoundException;
 import app.users.model.Admin;
 import app.users.model.Customer;
 import app.users.model.User;
-import app.users.repository.UserRepository;
-import app.users.repository.UserRepositorySingleton;
 import app.users.service.UserCommandService;
 import app.users.service.UserCommandServiceSingleton;
 import app.users.service.UserQueryService;
 import app.users.service.UserQueryServiceSingleton;
 
-import java.util.Optional;
 import java.util.Scanner;
 
 public class ViewLogin {
@@ -21,8 +18,8 @@ public class ViewLogin {
     private Scanner scanner;
 
     public ViewLogin(){
-        this.userCommandService = UserCommandServiceSingleton.getInstance();
-        this.userQueryService = UserQueryServiceSingleton.getInstance();
+        this.userCommandService = UserCommandServiceSingleton.getINSTANCE();
+        this.userQueryService = UserQueryServiceSingleton.getINSTANCE();
         this.scanner = new Scanner(System.in);
         this.play();
     }
@@ -91,7 +88,6 @@ public class ViewLogin {
         String registrationFullName = scanner.nextLine();
 
 
-        User user = new Customer(100,registrationFullName,registrationemail,registrationUsername,registrationPassword,"", "","");
 
 
 

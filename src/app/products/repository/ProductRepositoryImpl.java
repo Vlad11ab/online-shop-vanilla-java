@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class ProductRepositoryImpl implements ProductRepository{
@@ -15,20 +16,20 @@ public class ProductRepositoryImpl implements ProductRepository{
     private List<Product> products;
     private List<Product> shoppingCart;
 
-    String productfilepath;
+    String filename;
 
 
     public ProductRepositoryImpl() {
         products = new ArrayList<>();
         shoppingCart = new ArrayList<>();
 
-        productfilepath = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/products/data/Products.txt";
+        filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/products/data/Products.txt";
 
         this.loadData();
     }
 
     public void loadData() {
-        File file = new File(productfilepath);
+        File file = new File(filename);
 
         try(Scanner scanner = new Scanner(file)) {
             while(scanner.hasNextLine()) {
@@ -43,7 +44,7 @@ public class ProductRepositoryImpl implements ProductRepository{
 
     public void saveData() {
 
-        File file = new File(productfilepath);
+        File file = new File(filename);
         try {
             FileWriter fileWriter = new FileWriter(file);
             PrintWriter printWriter = new PrintWriter(fileWriter);
@@ -54,4 +55,35 @@ public class ProductRepositoryImpl implements ProductRepository{
         }
     }
 
+    @Override
+    public Optional<Product> findProductsById(int id) {
+
+        return products.stream().filter(product -> product.getId() == id).findAny();
+    }
+
+    @Override
+    public Optional<Product> findProductById(int id) {
+
+        return products.stream().filter(product -> product.getId() == id).findAny();
+    }
+
+    @Override
+    public Optional<Product> findProductByName(String name) {
+
+        return products.stream().filter(product -> product.getName().equals(name)).findAny();
+    }
+
+    @Override
+    public boolean foundProduct(Product product) {
+
+        if (product == null){
+            return false;
+        }else return products.stream().anyMatch(p -> p.equals(product));
+    }
+
+    @Override
+    public List<Product> listProducts() {
+
+        return products;
+    }
 }
