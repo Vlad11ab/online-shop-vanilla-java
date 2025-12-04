@@ -1,126 +1,53 @@
 package app.orderdetail.service;
 
+import app.orderdetail.exceptions.OrderDetailAlreadyExistsException;
+import app.orderdetail.exceptions.OrderDetailNotFoundException;
 import app.orderdetail.model.OrderDetail;
+import app.orderdetail.repository.OrderDetailRepository;
+import app.orderdetail.repository.OrderDetailRepositorySingleton;
 import app.orders.model.Order;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class OrderDetailCommandServiceImpl implements OrderDetailCommandService {
 
-    private List<OrderDetail> orderdetails;
-    private String filename;
+    OrderDetailRepository orderDetailRepository;
 
     public OrderDetailCommandServiceImpl() {
-        orderdetails = new ArrayList<>();
-
-        this.filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/orderdetail/data/OrderDetails.txt";
-//        this.loadData();
-    }
-
-    public void loadData() {
-        orderdetails.clear();
-
-        File file = new File(filename);
-
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                OrderDetail orderDetail = new OrderDetail(line);
-                orderdetails.add(orderDetail);
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        orderDetailRepository = OrderDetailRepositorySingleton.getINSTANCE();
     }
 
     @Override
-    public void addOrderDetail(OrderDetail orderDetail) {
-        orderDetail.setId(generateOrderDetailId());
+    public void addOrderDetail(OrderDetail orderDetail) throws OrderDetailAlreadyExistsException {
 
-        this.orderdetails.add(orderDetail);
-        this.saveData();
-    }
+        Optional<OrderDetail> searchedOrderDetail = orderDetailRepository.findOrderDetailById(orderDetail.getId());
 
-    private int generateOrderDetailId() {
-        this.loadData();
-
-        Random rand = new Random();
-        int orderDetailId = rand.nextInt(10000)+1;
-        while(getOrderDetailById(orderDetailId) != null) {
-            orderDetailId = rand.nextInt(10000)+1;
+        if(searchedOrderDetail.isPresent()){
+            throw new OrderDetailAlreadyExistsException();
+        } else {
+            orderDetailRepository.addOrderDetail(orderDetail);
         }
-
-        return orderDetailId;
     }
 
-    private OrderDetail getOrderDetailById(int id) {
-        this.loadData();
-
-        for(OrderDetail orderDetail : orderdetails) {
-            if(orderDetail.getId() == id) {
-                return orderDetail;
-            }
-        }
-
-        return null;
-    }
 
     @Override
-    public void removeOrderDetail(OrderDetail orderDetail) {
-        this.orderdetails.remove(orderDetail);
-    }
+    public void removeOrderDetail(OrderDetail orderDetail) throws OrderDetailNotFoundException {
 
+        Optional<OrderDetail> searchedOrderDetail = orderDetailRepository.findOrderDetailById(orderDetail.getId());
 
-
-    public int generateOrderId() {
-        Random rand = new Random();
-        int orderID = rand.nextInt(10000) + 1;
-        while (getOrderDetailsByOrderId(orderID) != null) {
-            orderID = rand.nextInt(10000) + 1;
-        }
-
-        return orderID;
-    }
-
-    public List<OrderDetail> getOrderDetailsByOrderId(int orderId) {
-
-        for( OrderDetail orderDetail : orderdetails ) {
-            if(orderDetail.getOrderId() == orderId) {
-                return orderdetails;
-            }
-        }return null;
-    }
-
-    public void saveData() {
-
-        File file = new File(filename);
-        try {
-            FileWriter fileWriter = new FileWriter(file);
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-            printWriter.print(this);
-            printWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(searchedOrderDetail.isEmpty()){
+            throw new OrderDetailNotFoundException();
+        } else {
+            orderDetailRepository.listOrderDetails().remove(orderDetail);
         }
     }
 
-    @Override
-    public String toString() {
-        String text="";
-        for(int i = 0; i < orderdetails.size()-1; i++){
-            text += orderdetails.get(i).toString() + "\n";
-        }
-        text += orderdetails.get(orderdetails.size()-1).toString();
-        return text;
-    }
+
+
 
 
 }

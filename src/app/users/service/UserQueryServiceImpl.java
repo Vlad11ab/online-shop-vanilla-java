@@ -39,7 +39,7 @@ public class UserQueryServiceImpl implements UserQueryService {
 
         Optional<User> searchedUser = userRepository.findUserByUsernameAndPassword(username,password);
 
-        if(!searchedUser.isPresent()) {
+        if(searchedUser.isEmpty()) {
             throw new UserNotFoundException();
         }
 

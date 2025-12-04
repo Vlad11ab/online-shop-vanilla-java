@@ -4,10 +4,12 @@ import app.orderdetail.service.OrderDetailCommandService;
 import app.orderdetail.service.OrderDetailCommandServiceSingleton;
 import app.orderdetail.service.OrderDetailQueryService;
 import app.orderdetail.service.OrderDetailQueryServiceSingleton;
+import app.orders.exceptions.OrderNotFoundException;
 import app.orders.service.OrderCommandService;
 import app.orders.service.OrderCommandServiceSingleton;
 import app.orders.service.OrderQueryService;
 import app.orders.service.OrderQueryServiceSingleton;
+import app.products.exceptions.ProductNotFoundException;
 import app.products.service.ProductCommandService;
 import app.products.service.ProductCommandServiceSingleton;
 import app.products.service.ProductQueryService;
@@ -42,14 +44,14 @@ public class ViewCustomer {
 
     public ViewCustomer(Customer customer){
         this.customer = customer;
-        this.userCommandService = UserCommandServiceSingleton.getInstance();
-        this.userQueryService = UserQueryServiceSingleton.getInstance();
-        this.orderDetailCommandService = OrderDetailCommandServiceSingleton.getInstance();
-        this.orderDetailQueryService = OrderDetailQueryServiceSingleton.getInstance();
-        this.orderCommandService = OrderCommandServiceSingleton.getInstance();
-        this.orderQueryService = OrderQueryServiceSingleton.getInstance();
-        this.productCommandService = ProductCommandServiceSingleton.getInstance();
-        this.productQueryService = ProductQueryServiceSingleton.getInstance();
+        this.userCommandService = UserCommandServiceSingleton.getINSTANCE();
+        this.userQueryService = UserQueryServiceSingleton.getINSTANCE();
+        this.orderDetailCommandService = OrderDetailCommandServiceSingleton.getINSTANCE();
+        this.orderDetailQueryService = OrderDetailQueryServiceSingleton.getINSTANCE();
+        this.orderCommandService = OrderCommandServiceSingleton.getINSTANCE();
+        this.orderQueryService = OrderQueryServiceSingleton.getINSTANCE();
+        this.productCommandService = ProductCommandServiceSingleton.getINSTANCE();
+        this.productQueryService = ProductQueryServiceSingleton.getINSTANCE();
         this.cart = new Cart();
         this.scanner = new Scanner(System.in);
         this.play();
@@ -137,7 +139,12 @@ public class ViewCustomer {
 
             if(orderQueryService.checkOrderId(orderId)){
 
-                List <OrderDetail> orderdetails = orderDetailQueryService.getOrderDetailsByOrderId(orderId);
+                List<OrderDetail> orderdetails = null;
+                try {
+                    orderdetails = orderDetailQueryService.findOrderDetailsByOrderId(orderId);
+                } catch (OrderNotFoundException orderNotFoundException) {
+                    System.out.println(orderNotFoundException.getMessage());
+                }
 
                     for(OrderDetail orderDetail : orderdetails) {
                         if (orderDetail.getOrderId() == orderId) {
@@ -153,7 +160,7 @@ public class ViewCustomer {
         System.out.println("Comenzile clientului sunt: ");
 
 
-        List<Order> clientOrders = this.orderQueryService.getOrdersByCustomerId(customer.getId());
+        List<Order> clientOrders = this.orderQueryService.findOrdersByCustomerId(customer.getId());
         for(Order order : clientOrders){
             System.out.println("Comanda: " + order + " cu ID-ul: " + order.getId());
 
@@ -179,7 +186,12 @@ public class ViewCustomer {
         System.out.println("Introduceti numele produsului pe care doriti sa-l stergeti din cos: ");
         String productsname = scanner.nextLine();
 
-        Product product = productQueryService.getProductByName(productsname);
+        Product product = null;
+        try {
+            product = productQueryService.findProductByName(productsname);
+        } catch (ProductNotFoundException productNotFoundException) {
+            System.out.println(productNotFoundException.getMessage());
+        }
 
         if(product == null){
             System.out.println("Produsul nu exista!");
@@ -209,8 +221,7 @@ public class ViewCustomer {
         else {
             List<CartItem> cartItems = cart.getCartItems();
 
-
-            Order order =  new Order(this.customer.getId(),this.cart.totalPrice(),"aasdad");
+            Order order =  new Order(this.customer.getId(),this.cart.totalPrice(),"ShippingAddres");
             this.orderCommandService.addOrder(order);
             for (CartItem cartItem : cartItems) {
                 OrderDetail orderDetail = new OrderDetail(order.getId(), cartItem.getProduct().getId(), cartItem.getProduct().getId(), cartItem.getQuantity());
@@ -218,8 +229,6 @@ public class ViewCustomer {
 
             }
 
-//            this.orderCommandService.saveData();
-//            this.orderDetailCommandService.saveData();
             System.out.println("Comanda cu Id-ul:" + order.getId()+ " a fost trimisa cu succes");
         }
 
@@ -234,7 +243,12 @@ public class ViewCustomer {
         System.out.println("Introduceti numele produsului pe care doriti sa-l editati: ");
         String productname = scanner.nextLine();
 
-        Product product = productQueryService.getProductByName(productname);
+        Product product = null;
+        try {
+            product = productQueryService.findProductByName(productname);
+        } catch (ProductNotFoundException productNotFoundException) {
+            System.out.println(productNotFoundException.getMessage());
+        }
 
         if(product == null){
             System.out.println("Produsul nu exista!");
@@ -265,7 +279,12 @@ public class ViewCustomer {
 
         System.out.println("Introduceti numele produsului dorit: ");
         String productName = scanner.nextLine();
-        Product product = productQueryService.getProductByName(productName);
+        Product product = null;
+        try {
+            product = productQueryService.findProductByName(productName);
+        } catch (ProductNotFoundException productNotFoundException) {
+            System.out.println(productNotFoundException.getMessage());
+        }
         //todo:veriific existenta produsului
         //todo:Creez un cartItem cu detaliile din produs
          if(productQueryService.foundProduct(product)){

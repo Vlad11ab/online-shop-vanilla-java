@@ -3,14 +3,14 @@ package app.users.service;
 public class UserQueryServiceSingleton {
 
     private static class LazyHolder {
-        private static final UserQueryService instance = new UserQueryServiceImpl();
+        private static final UserQueryService INSTANCE = new UserQueryServiceImpl();
     }
 
     private UserQueryServiceSingleton() {
 
     }
 
-    public static UserQueryService getInstance() {
-        return LazyHolder.instance;
+    public static UserQueryService getINSTANCE() {
+        return LazyHolder.INSTANCE;
     }
 }

@@ -3,14 +3,14 @@ package app.products.service;
 public class ProductQueryServiceSingleton {
 
     private static class LazyHolder {
-        private static final ProductQueryService instance = new ProductQueryServiceImpl();
+        private static final ProductQueryService INSTANCE = new ProductQueryServiceImpl();
     }
 
     private ProductQueryServiceSingleton() {
 
     }
 
-    public static ProductQueryService getInstance() {
-        return LazyHolder.instance;
+    public static ProductQueryService getINSTANCE() {
+        return LazyHolder.INSTANCE;
     }
 }

@@ -1,33 +1,32 @@
 package app.users.repository;
 
+import app.orderdetail.model.OrderDetail;
 import app.users.model.Admin;
 import app.users.model.Customer;
 import app.users.model.User;
 
 
-import javax.swing.text.html.Option;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class UserRepositoryImpl implements UserRepository{
 
     private List<User> users;
-    String userfilepath;
+    String filename;
 
     public UserRepositoryImpl() {
         users = new ArrayList<>();
-        userfilepath = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/users/data/Users.txt";
+        filename = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/users/data/Users.txt";
         this.loadData();
     }
 
 
 
     public void loadData() {
-        File file = new File(userfilepath);
+        File file = new File(filename);
 
         try(Scanner scanner = new Scanner(file)) {
             while(scanner.hasNextLine()) {
@@ -52,7 +51,7 @@ public class UserRepositoryImpl implements UserRepository{
 
 
     public void saveData() {
-        File file = new File(userfilepath);
+        File file = new File(filename);
 
         try{
             FileWriter fileWriter = new FileWriter(file);
@@ -75,7 +74,7 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
 
-    public int generateUniqueId() {
+    private int generateUniqueId() {
         Random random = new Random();
         int generatedId = random.nextInt();
 
@@ -109,9 +108,22 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
+    public String toString() {
+
+        StringBuilder text;
+        text = new StringBuilder();
+        int i;
+        for( i=0 ;i<users.size()-1; i++){
+            text.append(users.get(i)+"\n");
+        }
+        text.append(users.get(i));
+        return String.valueOf(text);
+    }
+
+    @Override
     public List<User> listUsers() {
 
-        return users.stream().toList();
+        return users;
 
     }
 

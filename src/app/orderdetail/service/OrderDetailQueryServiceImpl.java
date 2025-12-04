@@ -1,74 +1,39 @@
 package app.orderdetail.service;
 
 import app.orderdetail.model.OrderDetail;
+import app.orderdetail.repository.OrderDetailRepository;
+import app.orderdetail.repository.OrderDetailRepositorySingleton;
+import app.orders.exceptions.OrderNotFoundException;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Optional;
 
 public class OrderDetailQueryServiceImpl implements OrderDetailQueryService {
 
-    private ArrayList<OrderDetail> orderdetails;
+    OrderDetailRepository orderDetailRepository;
 
     public OrderDetailQueryServiceImpl() {
-        orderdetails = new ArrayList<>();
-
-        this.loadData();
+        orderDetailRepository = OrderDetailRepositorySingleton.getINSTANCE();
     }
 
-
-    public void loadData() {
-        orderdetails.clear();
-
-        try {
-            String filepath = "/Users/vlad11ab/Documents/mycode/OnlineStore/OnlineStore/src/app/orderdetail/data/OrderDetails.txt";
-            File file = new File(filepath);
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                this.orderdetails.add(new OrderDetail(line));
-            }
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    @Override
-    public List<OrderDetail> getOrderDetailsByOrderId(int orderId) {
-
-        this.loadData();
-        List<OrderDetail> od = new ArrayList<>();
-
-
-        for (OrderDetail orderdetail : orderdetails) {
-            if (orderdetail.getOrderId() == orderId) {
-                od.add(orderdetail);
-            }
-        }
-
-        return od;
-    }
-
-    @Override
-    public String toString() {
-        String text="";
-        for(int i = 0; i < orderdetails.size()-1; i++){
-            text += orderdetails.get(i).toString() + "\n";
-        }
-        text += orderdetails.get(orderdetails.size()-1).toString();
-        return text;
-    }
 
     @Override
     public void afisare() {
-        this.loadData();
-        System.out.println(this);
+
+        orderDetailRepository.listOrderDetails().forEach(System.out::println);
     }
 
+    @Override
+    public List<OrderDetail> findOrderDetailsByOrderId(int orderId) throws OrderNotFoundException {
+
+        Optional<OrderDetail> searchedOrderDetail = orderDetailRepository.listOrderDetails().stream().filter(orderDetail -> orderDetail.getOrderId() == orderId).findAny();
+
+        if(searchedOrderDetail.isEmpty()){
+            throw new OrderNotFoundException();
+        } else {
+            return orderDetailRepository.findOrderDetailsByOrderId(orderId);
+        }
+    }
 
 
 }

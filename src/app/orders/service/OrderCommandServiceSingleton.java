@@ -4,15 +4,15 @@ public class OrderCommandServiceSingleton {
 
     private static class LazyHolder {
 
-        private static final OrderCommandService instance = new OrderCommandServiceImpl();
+        private static final OrderCommandService INSTANCE = new OrderCommandServiceImpl();
     }
 
     private OrderCommandServiceSingleton() {
 
     }
 
-    public static OrderCommandService getInstance() {
-        return LazyHolder.instance;
+    public static OrderCommandService getINSTANCE() {
+        return LazyHolder.INSTANCE;
     }
 
 }
